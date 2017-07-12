@@ -1,18 +1,18 @@
-# Eclipse Structured Data Markup
-- Contributors: Craig Stanfield
-- Donate link: http://eclipse-creative.com/
-- Tags: Structured Data, LD+JSON, SEO Tools
-- Requires at least: 3.0.1
-- Tested up to: 4.8
-- Stable tag: 4.7.1
-- License: GPLv2 or later
-- License URI: http://www.gnu.org/licenses/gpl-2.0.html
+=== Eclipse Structured Data Markup ===
+Contributors: CraigStanfield
+Donate link: http://eclipse-creative.com/
+Tags: Structured Data, LD+JSON, SEO Tools
+Requires at least: 3.0.1
+Tested up to: 4.8
+Stable tag: 4.7.1
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Eclipse SDM creates structured data markup fields with ACF
 
-## Description
+== Description ==
 
-> **(https://eclipse-creative.com "Take your business to new heights")** |
+> **[Silver Bullet Pro](https://eclipse-creative.com "Take your business to new heights")** |
 
 Welcome to the Eclipse SDM Plugin for Wordpress by Eclipse Creative Consultants Ltd. This plugin is intended to plug
 the gaps left by other SEO plugins (We have Yoast on almost all our sites) This plugin is still in the early days of
@@ -23,7 +23,7 @@ included in pages as needed.
 
 Eclipse SDM is used to add LocalBusiness type to the home page by default but can be expanded to suit other needs
 
-## Installation
+== Installation ==
 
 This section describes how to install the plugin and get it working.
 
@@ -34,13 +34,13 @@ e.g.
 3. Click the Eclipse SDM menu option and fill the options.
 4. Reload required frontend page, markup will be included and can be tested at https://search.google.com/structured-data/testing-tool/u/0/
 
-## Frequently Asked Questions
+== Frequently Asked Questions ==
 
 1. How do you create a new SDM and add to a specific page?
-
+* TODO add instructions
 add following to homepage template
-
-```$esAuto = get_option('es_auto');
+[code]
+$esAuto = get_option('es_auto');
 if ($esAuto) {
     $currencies = implode(',', get_option('es_currencies'));
     $template = get_template_directory_uri();
@@ -70,9 +70,9 @@ if ($esAuto) {
 <script type="application/ld+json">
     <?php echo $json ?>
 </script>
-```
+[/code]
 
-## Screenshots
+== Screenshots ==
 
 1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
 the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
@@ -80,31 +80,50 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 (or jpg, jpeg, gif).
 2. This is the second screen shot
 
-## Changelog
+== Changelog ==
 
 = 0.1.0 =
 * This is the first release of this plugin.
 
-## Upgrade Notice
+== Upgrade Notice ==
 
-### 0.1.0
+= 0.1.0 =
 This is the release.
 
-## Arbitrary section
+== Arbitrary section ==
 
 You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
 plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
 "installation."  Arbitrary sections will be shown below the built-in sections outlined above.
 
-### Eclipse Structured Data Markup
+== Eclipse Toolbox ==
 
 Features:
 
 1. LocalBusiness SDM for home page
 2. custom SDM on custom pages (wip)
 
-### Upcoming features:
+Upcoming features:
 
  1. Add any sdm type to required page
 
 
+
+
+
+
+
+
+
+
+
+Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
+Titles are optional, naturally.
+
+[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
+            "Markdown is what the parser uses to process much of the readme file"
+
+Markdown uses email style notation for blockquotes and I've been told:
+> Asterisks for *emphasis*. Double it up  for **strong**.
+
+`<?php code(); // goes in backticks ?>`
