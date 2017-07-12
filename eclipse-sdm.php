@@ -17,7 +17,7 @@
  * Plugin URI:        https://www.eclipse-creative.com/wordpress-plugins/EclipseSDM/
  * Author URI:        https://www.eclipse-creative.com
  * Description:       Add structured data markup in ld+json format to desired pages
- * Version:           0.1.0
+ * Version:           0.0.1
  * Email:             c.stanfield@eclipse-creative.com
  * Author:            Eclipse Creative Consultants Ltd.
  * License:           GPL-2.0+
