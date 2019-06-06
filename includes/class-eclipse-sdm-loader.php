@@ -123,7 +123,7 @@ class Eclipse_SDM_Loader {
 		foreach ( $this->actions as $hook ) {
 			add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
 		}
-
+        //$public = new Eclipse_SDM_Public('eclipse-sdm', '0.1.0');
 	}
 
 }

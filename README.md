@@ -1,18 +1,18 @@
-# Eclipse Structured Data Markup
-- Contributors: Craig Stanfield
-- Donate link: http://eclipse-creative.com/
-- Tags: Structured Data, LD+JSON, SEO Tools
-- Requires at least: 3.0.1
-- Tested up to: 4.8
-- Stable tag: 4.7.1
-- License: GPLv2 or later
-- License URI: http://www.gnu.org/licenses/gpl-2.0.html
+#Eclipse Structured Data Markup
 
-Eclipse SDM creates structured data markup fields with ACF
-
+######Contributors: CraigStanfield
+######Donate link: http://eclipse-creative.com/
+######Tags: Structured Data, LD+JSON, SEO Tools
+######Requires at least: 3.0.1
+######Tested up to: 4.8
+######Stable tag: 4.7.1
+######License: GPLv2 or later<
+######License URI: http://www.gnu.org/licenses/gpl-2.0.html
+######Eclipse SDM creates structured data markup fields with ACF
+___
 ## Description
 
-> **(https://eclipse-creative.com "Take your business to new heights")** |
+> **[Silver Bullet Pro](https://eclipse-creative.com "Take your business to new heights")** |
 
 Welcome to the Eclipse SDM Plugin for Wordpress by Eclipse Creative Consultants Ltd. This plugin is intended to plug
 the gaps left by other SEO plugins (We have Yoast on almost all our sites) This plugin is still in the early days of
@@ -36,43 +36,124 @@ e.g.
 
 ## Frequently Asked Questions
 
-1. How do you create a new SDM and add to a specific page?
+**1 How do you create a new SDM and add to a specific page?**
 
-add following to homepage template
+This version auto builds the acf tables needed and the schema data can be entered in the Eclipse SDM options page
+to add a schema script to a page include the following:
 
-```$esAuto = get_option('es_auto');
-if ($esAuto) {
-    $currencies = implode(',', get_option('es_currencies'));
-    $template = get_template_directory_uri();
-    $schemaArray = array(
-        '@context' => 'http://schema.org',
-        '@type' => 'LocalBusiness',
-        '@id' => '#LocalBusiness',
-        'currenciesAccepted' => $currencies,
-        'openingHours' => get_option('es_opening'),
-        'paymentAccepted' => get_option('es_payment'),
-        'address' => get_option('es_address'),
-        'faxNumber' => get_option('es_fax'),
-        'logo' => $template . get_option('es_logo'),
-        'email' => get_option('es_email'),
-        'name' => get_option('es_name'),
-        'description' => get_option('es_description'),
-        'telephone' => get_option('es_phone'),
-        'photo' => $template . get_option('es_photo'),
-        'image' => $template . get_option('es_image'),
-        'url' => get_option('es_url')
-    );
-    $json = json_encode($schemaArray);
-} else {
-    $json = stripslashes(str_replace('/', '', get_option('es_script')));
-}
+> echo do_shortcode("[ecl-sdm schema=standard]");
+
+valid values for the schema attributes are as follows
+
+>standard - this creates an organisation and any local businesses. This is the default suggested value.
+
+>organisation - this crates only organisation (english spelling)
+
+>people - this creates a schema of all people entered with contact points
+
+>local_business - this creates a schema of just local businesses
+
+>all - this creates a schema for organisation, all people and all local businesses
+
+Once the do shortcode snippet is inserted it will generate the required script inline. I recommend using the header
+at the end of the head section so it exists on all pages. The shortcode snippet can be included anywhere on any page.
+
+**2 How do i use the search and replace?**
+
+Enter the search and replace data to the Search and Replace settings page in wordpress.
+
+in any templates you need to add the functionality add a sar class to the region which produces the content to use the functionality.
+eg. a defult wordpress page.php contains:
+``` php
+<?php
+/**
+ * page.php
+ */
+get_header();
+$templateDirectory = get_template_directory_uri();
+$title = get_field('page_title');
 ?>
-<script type="application/ld+json">
-    <?php echo $json ?>
-</script>
+<div class="page__banner">
+    <?php get_template_part('partials/page-banner'); ?>
+</div>
+
+<div class="page__container__wrapper policy-page row">
+	<h1><?php echo $title; ?></h1>
+    <?php if(have_posts()) {
+        while (have_posts()) {
+            the_post();
+            get_template_part('content', 'page');
+        }
+    } ?>
+</div>
+
+<?php get_footer() ?>
 ```
 
-## Screenshots
+we can add sar right after row in the page container div
+``` php
+<?php
+/**
+ * page.php
+ */
+get_header();
+$templateDirectory = get_template_directory_uri();
+$title = get_field('page_title');
+?>
+<div class="page__banner">
+    <?php get_template_part('partials/page-banner'); ?>
+</div>
+
+<div class="page__container__wrapper policy-page row sar">
+	<h1><?php echo $title; ?></h1>
+    <?php if(have_posts()) {
+        while (have_posts()) {
+            the_post();
+            get_template_part('content', 'page');
+        }
+    } ?>
+</div>
+
+<?php get_footer() ?>
+```
+
+**3 How to use Q and A feature?**
+
+This feature currently only works with taxonomy category. The following needs to be at the top of your category.php file:
+```
+$term                 = get_queried_object();
+$rows                 = get_field( "faqpage_mainentity", $term );
+
+$schema               = array();
+$schema['@context']   = "https://schema.org";
+$schema['type']       = "FAQPage";
+$schema['mainEntity'] = array();
+$qandas = '';
+foreach ( $rows as $row ) {
+    $question               = $row['name'];
+    $answer                 = $row['text'];
+    $schema['mainEntity'][] = array(
+        "@type" => "Question",
+        "name"  => $question,
+        "acceptedAnswer" => array(
+            "@type" => "Answer",
+            "text"  => $answer
+        ),
+    );
+    $qandas  .= '
+        <h2>' . $question . '</h2>
+        <p>' . $answer . '</p>';
+}
+
+$ldjson = json_encode( $schema );
+echo '<script type="application/ld+json">' . $ldjson . '</script>';
+```
+Near the end of this file we need to echo the questions and answers by adding the following
+```
+<?php echo $qandas; // Q and A section if available ?>
+```
+
+### Screenshots
 
 1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
 the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
@@ -80,31 +161,57 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 (or jpg, jpeg, gif).
 2. This is the second screen shot
 
-## Changelog
+### Changelog
 
-= 0.1.0 =
+> 2.1.2
+
+Added category Q & A schema and functionality.
+
+> 2.1.1
+
+Refactor how scripts are added (acf repeaters) bug fixes. new shortcode method added to replace manual script adding
+
+> 2.0.0
+
+Search and Replace functionality added
+
+>0.1.0
+
 * This is the first release of this plugin.
 
-## Upgrade Notice
+### Upgrade Notice
 
-### 0.1.0
-This is the release.
+> 2.1.2
 
-## Arbitrary section
+No notices however the Q and A feature will only work with taxonomy category scenarios. This will be expanded in the next release
+
+> 2.1.1
+
+This release needs you to remove and acf objects called Eclipse SDM or Search & Replace. The code will create its own tables and you wont be able to edit them from the acf page.
+
+> Arbitrary section
 
 You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
 plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
 "installation."  Arbitrary sections will be shown below the built-in sections outlined above.
 
-### Eclipse Structured Data Markup
+> Eclipse Toolbox
 
-Features:
+####Features:
 
 1. LocalBusiness SDM for home page
-2. custom SDM on custom pages (wip)
+2. Custom SDM on custom pages (wip)
+3. Search and replace functionality
 
-### Upcoming features:
+####Upcoming features:
 
- 1. Add any sdm type to required page
+ 1. Add any sdm type to required page using flexible content from acf
 
 
+[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
+            "Markdown is what the parser uses to process much of the readme file"
+
+Markdown uses email style notation for blockquotes and I've been told:
+> Asterisks for *emphasis*. Double it up  for **strong**.
+
+`<?php code(); // goes in backticks ?>`

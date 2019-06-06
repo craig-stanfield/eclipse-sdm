@@ -69,7 +69,7 @@ class Eclipse_SDM {
 	public function __construct() {
 
 		$this->plugin_name = 'eclipse-sdm';
-		$this->version = '0.1.0';
+		$this->version = '2.1.1';
 
 		$this->load_dependencies();
 		$this->set_locale();

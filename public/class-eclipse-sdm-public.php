@@ -96,7 +96,29 @@ class Eclipse_SDM_Public {
 		 * class.
 		 */
 
-		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/eclipse-sdm-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/eclipse-sdm-public.js', array( 'jquery' ), $this->version, false );
+
+		$fields = get_field('key_values', 'options');
+        $dataToBePassed = array();
+        if ($fields) {
+            foreach ( $fields as $key => $values ) {
+                switch ( $values['type'] ) {
+                    case 'blink':
+                        $replace = '<a href="' . $values["linking_url"] . '"><strong>' . $values['replace'] . '</strong></a>';
+                        break;
+                    case 'link':
+                        $replace = '<a href="' . $values["linking_url"] . '">' . $values['replace'] . '</a>';
+                        break;
+                    case 'highlight':
+                        $replace = '<strong>' . $values['replace'] . '</strong>';
+                        break;
+                    default:
+                        $replace = $values['replace'];
+                }
+                $dataToBePassed[ $values['search'] ] = $replace;
+            }
+        }
+        wp_localize_script( $this->plugin_name, 'php_vars', $dataToBePassed );
 
 	}
 
