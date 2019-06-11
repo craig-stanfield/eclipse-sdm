@@ -17,7 +17,7 @@
  * Plugin URI:        https://www.eclipse-creative.com/wordpress-plugins/EclipseSDM/
  * Author URI:        https://www.eclipse-creative.com
  * Description:       Add SDM ld+json to pages with qa category pages and dynamic search & replace. Uses ACF in PHP don't create tables
- * Version:           2.1.2
+ * Version:           2.1.3
  * Email:             c.stanfield@eclipse-creative.com
  * Author:            Eclipse Creative Consultants Ltd.
  * License:           GPL-2.0+
@@ -936,68 +936,68 @@ if( function_exists('acf_add_options_page') ) {
             "key"=> "group_5cf7683ed2524",
             "title"=> "Q and A region",
             "fields"=> array(
-            array(
-                "key"=> "field_5cf7d93c97242",
-                "label"=> "FAQPage mainEntity",
-                "name"=> "faqpage_mainentity",
-                "type"=> "repeater",
-                "instructions"=> "",
-                "required"=> 0,
-                "conditional_logic"=> 0,
-                "wrapper"=> array(
-                "width"=> "",
-                    "class"=> "",
-                    "id"=> ""
-                ),
-                "collapsed"=> "field_5cf7d96f97243",
-                "min"=> 0,
-                "max"=> 0,
-                "layout"=> "block",
-                "button_label"=> "",
-                "sub_fields"=> array(
-                    array(
-                        "key"=> "field_5cf7d96f97243",
-                        "label"=> "Question",
-                        "name"=> "name",
-                        "type"=> "text",
-                        "instructions"=> "",
-                        "required"=> 1,
-                        "conditional_logic"=> 0,
-                        "wrapper"=> array(
+                array(
+                    "key"=> "field_5cf7d93c97242",
+                    "label"=> "FAQPage mainEntity",
+                    "name"=> "faqpage_mainentity",
+                    "type"=> "repeater",
+                    "instructions"=> "",
+                    "required"=> 0,
+                    "conditional_logic"=> 0,
+                    "wrapper"=> array(
                         "width"=> "",
-                            "class"=> "",
-                            "id"=> ""
-                        ),
-                        "default_value"=> "",
-                        "placeholder"=> "",
-                        "prepend"=> "",
-                        "append"=> "",
-                        "maxlength"=> ""
+                        "class"=> "",
+                        "id"=> ""
                     ),
-                    array(
-                        "key"=> "field_5cf7d9b497244",
-                        "label"=> "Answer",
-                        "name"=> "text",
-                        "type"=> "textarea",
-                        "instructions"=> "",
-                        "required"=> 1,
-                        "conditional_logic"=> 0,
-                        "wrapper"=> array(
-                        "width"=> "",
-                            "class"=> "",
-                            "id"=> ""
+                    "collapsed"=> "field_5cf7d96f97243",
+                    "min"=> 0,
+                    "max"=> 0,
+                    "layout"=> "block",
+                    "button_label"=> "",
+                    "sub_fields"=> array(
+                        array(
+                            "key"=> "field_5cf7d96f97243",
+                            "label"=> "Question",
+                            "name"=> "name",
+                            "type"=> "text",
+                            "instructions"=> "",
+                            "required"=> 1,
+                            "conditional_logic"=> 0,
+                            "wrapper"=> array(
+                                "width"=> "",
+                                "class"=> "",
+                                "id"=> ""
+                            ),
+                            "default_value"=> "",
+                            "placeholder"=> "",
+                            "prepend"=> "",
+                            "append"=> "",
+                            "maxlength"=> ""
                         ),
-                        "default_value"=> "",
-                        "placeholder"=> "Enter the answer here",
-                        "maxlength"=> "",
-                        "rows"=> "",
-                        "new_lines"=> ""
+                        array(
+                            "key"=> "field_5cf7d9b497244",
+                            "label"=> "Answer",
+                            "name"=> "text",
+                            "type"=> "textarea",
+                            "instructions"=> "",
+                            "required"=> 1,
+                            "conditional_logic"=> 0,
+                            "wrapper"=> array(
+                                "width"=> "",
+                                "class"=> "",
+                                "id"=> ""
+                            ),
+                            "default_value"=> "",
+                            "placeholder"=> "Enter the answer here",
+                            "maxlength"=> "",
+                            "rows"=> "",
+                            "new_lines"=> ""
+                        )
                     )
                 )
-            )
-        ),
+            ),
             "location"=> array(
-            array(
+                array(
                     array(
                         "param"=> "taxonomy",
                         "operator"=> "==",
@@ -1024,11 +1024,11 @@ function acf_load_contact_point_field_choices( $field ) {
     if( have_rows('person', 'option') ) {
         while ( have_rows( 'person', 'option' ) ) {
             the_row();
-                $value = get_sub_field( 'name' );
-                $label = get_sub_field( 'name' );
+            $value = get_sub_field( 'name' );
+            $label = get_sub_field( 'name' );
 
-                // append to choices
-                $field['choices'][ $value ] = $label;
+            // append to choices
+            $field['choices'][ $value ] = $label;
         }
     }
 
