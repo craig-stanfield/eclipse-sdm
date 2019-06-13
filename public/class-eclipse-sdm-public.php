@@ -82,44 +82,45 @@ class Eclipse_SDM_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts()
+    {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Eclipse_SDM_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Eclipse_SDM_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+        /**
+         * This function is provided for demonstration purposes only.
+         *
+         * An instance of this class should be passed to the run() function
+         * defined in Eclipse_SDM_Loader as all of the hooks are defined
+         * in that particular class.
+         *
+         * The Eclipse_SDM_Loader will then create the relationship
+         * between the defined hooks and the functions defined in this
+         * class.
+         */
+        if (!is_admin()) {
+            wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/eclipse-sdm-public.js', array('jquery'), $this->version, false);
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/eclipse-sdm-public.js', array( 'jquery' ), $this->version, false );
-
-		$fields = get_field('key_values', 'options');
-        $dataToBePassed = array();
-        if ($fields) {
-            foreach ( $fields as $key => $values ) {
-                switch ( $values['type'] ) {
-                    case 'blink':
-                        $replace = '<a href="' . $values["linking_url"] . '"><strong>' . $values['replace'] . '</strong></a>';
-                        break;
-                    case 'link':
-                        $replace = '<a href="' . $values["linking_url"] . '">' . $values['replace'] . '</a>';
-                        break;
-                    case 'highlight':
-                        $replace = '<strong>' . $values['replace'] . '</strong>';
-                        break;
-                    default:
-                        $replace = $values['replace'];
+            $fields = get_field('key_values', 'options');
+            $dataToBePassed = array();
+            if ($fields) {
+                foreach ($fields as $key => $values) {
+                    switch ($values['type']) {
+                        case 'blink':
+                            $replace = '<a href="' . $values["linking_url"] . '"><strong>' . $values['replace'] . '</strong></a>';
+                            break;
+                        case 'link':
+                            $replace = '<a href="' . $values["linking_url"] . '">' . $values['replace'] . '</a>';
+                            break;
+                        case 'highlight':
+                            $replace = '<strong>' . $values['replace'] . '</strong>';
+                            break;
+                        default:
+                            $replace = $values['replace'];
+                    }
+                    $dataToBePassed[$values['search']] = $replace;
                 }
-                $dataToBePassed[ $values['search'] ] = $replace;
             }
+            wp_localize_script($this->plugin_name, 'php_vars', $dataToBePassed);
+
         }
-        wp_localize_script( $this->plugin_name, 'php_vars', $dataToBePassed );
-
-	}
-
+    }
 }

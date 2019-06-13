@@ -17,7 +17,7 @@
  * Plugin URI:        https://www.eclipse-creative.com/wordpress-plugins/EclipseSDM/
  * Author URI:        https://www.eclipse-creative.com
  * Description:       Add SDM ld+json to pages with qa category pages and dynamic search & replace. Uses ACF in PHP don't create tables
- * Version:           2.1.3
+ * Version:           2.1.4
  * Email:             c.stanfield@eclipse-creative.com
  * Author:            Eclipse Creative Consultants Ltd.
  * License:           GPL-2.0+
