@@ -162,6 +162,17 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 ### Changelog
+> 2.1.5
+
+Added telephone field
+
+> 2.1.4
+
+Fix http:schema.org bug and added priceRange
+
+> 2.1.3
+
+Github integration
 
 > 2.1.2
 
@@ -180,6 +191,14 @@ Search and Replace functionality added
 * This is the first release of this plugin.
 
 ### Upgrade Notice
+
+> 2.1.4
+
+Fix http:schema.org bug and added priceRange
+
+> 2.1.3
+
+Github integration
 
 > 2.1.2
 

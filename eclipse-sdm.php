@@ -17,7 +17,7 @@
  * Plugin URI:        https://www.eclipse-creative.com/wordpress-plugins/EclipseSDM/
  * Author URI:        https://www.eclipse-creative.com
  * Description:       Add SDM ld+json to pages with qa category pages and dynamic search & replace. Uses ACF in PHP don't create tables
- * Version:           2.1.4
+ * Version:           2.1.5
  * Email:             c.stanfield@eclipse-creative.com
  * Author:            Eclipse Creative Consultants Ltd.
  * License:           GPL-2.0+
@@ -317,25 +317,6 @@ if( function_exists('acf_add_options_page') ) {
                             'placeholder' => '',
                             'prepend' => '',
                             'append' => '',
-                        ),*/
-                        /*array(
-                            'key' => 'field_5c0feb6ed5ecb',
-                            'label' => 'Telephone',
-                            'name' => 'telephone',
-                            'type' => 'text',
-                            'instructions' => '',
-                            'required' => 0,
-                            'conditional_logic' => 0,
-                            'wrapper' => array(
-                                'width' => '',
-                                'class' => '',
-                                'id' => '',
-                            ),
-                            'default_value' => '',
-                            'placeholder' => '',
-                            'prepend' => '',
-                            'append' => '',
-                            'maxlength' => '',
                         ),*/
                         array(
                             'key' => 'field_5c0feb7dd5ecc',
@@ -647,7 +628,7 @@ if( function_exists('acf_add_options_page') ) {
                                 'id' => '',
                             ),
                             'return_format' => 'url',
-                            'preview_size' => 'thumbnail',
+                            'preview_size' => 'full',
                             'library' => 'all',
                             'min_width' => '',
                             'min_height' => '',
@@ -670,7 +651,7 @@ if( function_exists('acf_add_options_page') ) {
                                 'class' => '',
                                 'id' => '',
                             ),
-                            'default_value' => '',
+                            'default_value' => 'Call us',
                             'placeholder' => '',
                             'prepend' => '',
                             'append' => '',
@@ -680,6 +661,25 @@ if( function_exists('acf_add_options_page') ) {
                             'key' => 'field_5d0eeec9d4ed5',
                             'label' => 'opening Hours',
                             'name' => 'opening_hours',
+                            'type' => 'text',
+                            'instructions' => '',
+                            'required' => 0,
+                            'conditional_logic' => 0,
+                            'wrapper' => array(
+                                'width' => '',
+                                'class' => '',
+                                'id' => '',
+                            ),
+                            'default_value' => '',
+                            'placeholder' => '',
+                            'prepend' => '',
+                            'append' => '',
+                            'maxlength' => '',
+                        ),
+                        array(
+                            'key' => 'field_5c0feb6ed5ecb',
+                            'label' => 'Telephone',
+                            'name' => 'telephone',
                             'type' => 'text',
                             'instructions' => '',
                             'required' => 0,
@@ -1112,7 +1112,7 @@ function build_ecl_sdm( $schemas ) {
     foreach ( $schemas as $schema ) {
         $sdmPart = array();
         $repeater = get_field($schema, 'option');
-        $sdmPart['@context'] = 'http://schema.org';
+        $sdmPart['@context'] = 'https://schema.org';
         $sdmPart['@type']    = sdmName($schema, 'pascal');
         $sdmPart['@id']      = '#' . sdmName($schema, 'pascal');
         foreach ( $repeater as $fields ) {
