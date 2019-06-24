@@ -162,6 +162,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 ### Changelog
+> 2.1.6
+
+Added length to size js fix
+
 > 2.1.5
 
 Added telephone field
